@@ -23,12 +23,16 @@ def quote_display():
 
 
 def choose_option():
-    v = IntVar()
+    def show_choice():
+        print(v.get())
     choose_window = Tk()
     choose_window.title('Choose')
+    brakes_values = ['5', '10', '15', '20', '30']
+    v = IntVar(master=choose_window)
     options_label = Label(choose_window, text='Długość przerwy:', justify=LEFT, padx=20).pack()
-    option_1 = Radiobutton(choose_window, text='20 minut', padx=20, variable=v, value=1).pack(anchor=W)
-    option_2 = Radiobutton(choose_window, text='30 minut', padx=20, variable=v, value=2).pack(anchor=W)
+    for option, value in enumerate(brakes_values):
+        Radiobutton(choose_window, text=value+' minut', padx=20, variable=v, command=show_choice, value=option).pack(anchor=W)
+
 
 
 
