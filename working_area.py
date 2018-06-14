@@ -13,6 +13,15 @@ def counter_label(label):
     count()
 
 
+def quote_display():
+    quote_bill_gates = 'Software is a great combination between artistry and engineering.\n(Bill Gates)'
+    msg_window = Tk()
+    msg_window.title('Quote')
+    msg = Message(msg_window, text=quote_bill_gates)
+    msg.config(bg='green', fg='black', font='Times 24 italic')
+    msg.pack(fill=BOTH)
+
+
 # Initializing Tkinter by creating TK root widget - window with title bar.
 root = Tk()
 root.title('Time Counter')
@@ -39,10 +48,12 @@ Test testowanego testu testów.'''
 description_label = Label(root, justify=LEFT, padx=10, text=explanatation).pack(side='left')
 
 
-# Creating label for counting seconds
+# Creating label for counting seconds and quote button
 seconds_label = Label(root, fg='red')
 exit_button = Button(root, text='Quit', width=25, command=root.destroy)
+quote_button = Button(root, text='Quote', width=35, command=quote_display)
 exit_button.pack(side='bottom')
+quote_button.pack(side='bottom')
 seconds_label.pack(side='bottom')
 counter_label(seconds_label)
 
