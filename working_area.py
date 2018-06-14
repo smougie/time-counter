@@ -18,8 +18,18 @@ def quote_display():
     msg_window = Tk()
     msg_window.title('Quote')
     msg = Message(msg_window, text=quote_bill_gates)
-    msg.config(bg='green', fg='black', font='Times 24 italic')
+    msg.config(bg='pale green', fg='black', font='Times 24 italic', justify='right')
     msg.pack(fill=BOTH)
+
+
+def choose_option():
+    v = IntVar()
+    choose_window = Tk()
+    choose_window.title('Choose')
+    options_label = Label(choose_window, text='Długość przerwy:', justify=LEFT, padx=20).pack()
+    option_1 = Radiobutton(choose_window, text='20 minut', padx=20, variable=v, value=1).pack(anchor=W)
+    option_2 = Radiobutton(choose_window, text='30 minut', padx=20, variable=v, value=2).pack(anchor=W)
+
 
 
 # Initializing Tkinter by creating TK root widget - window with title bar.
@@ -50,12 +60,18 @@ description_label = Label(root, justify=LEFT, padx=10, text=explanatation).pack(
 
 # Creating label for counting seconds and quote button
 seconds_label = Label(root, fg='red')
-exit_button = Button(root, text='Quit', width=25, command=root.destroy)
+exit_button = Button(root, text='Quit', width=25, command=quit)
 quote_button = Button(root, text='Quote', width=35, command=quote_display)
+choose_button = Button(root, text='Choose', width=20, command=choose_option)
 exit_button.pack(side='bottom')
 quote_button.pack(side='bottom')
+choose_button.pack(side='bottom')
 seconds_label.pack(side='bottom')
 counter_label(seconds_label)
+
+# Creating radio button
+
+
 
 # Running the tkinter event loop which works until we close the window.
 root.mainloop()
