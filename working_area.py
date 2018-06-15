@@ -48,18 +48,33 @@ def choose_option():
 
 def check_option():
     def check():
-        print(var_1.get())
-        print(var_2.get())
-        print(var_3.get())
+        print('Opcja 1: {}\nOpcja 2: {}\nOpcja 3: {}'.format(var_1.get(), var_2.get(), var_3.get()))
     check_window = Tk()
     check_window.title('Check box test')
     Label(check_window, text='Kiedy mają nastąpić przerwy?', padx=50).grid(row=0, sticky=W)
     var_1 = IntVar(check_window)
-    Checkbutton(check_window, text='Po pierwszej sesji', variable=var_1, command=check).grid(row=1, sticky=W)
+    Checkbutton(check_window, text='Po pierwszej sesji', variable=var_1).grid(row=1, sticky=W)
     var_2 = IntVar(check_window)
-    Checkbutton(check_window, text='Po drugiej sesji', variable=var_2, command=check).grid(row=2, sticky=W)
+    Checkbutton(check_window, text='Po drugiej sesji', variable=var_2).grid(row=2, sticky=W)
     var_3 = IntVar(check_window)
-    Checkbutton(check_window, text='Po trzeciej sesji', variable=var_3, command=check).grid(row=3, sticky=W)
+    Checkbutton(check_window, text='Po trzeciej sesji', variable=var_3).grid(row=3, sticky=W)
+    Button(check_window, text='Show', command=check).grid(row=4, sticky=S, pady=5)
+
+def info_input_option():
+
+    def show_entry():
+        print('Imie: {}\nNazwisko: {}'.format(name.get(), last_name.get()))
+    info_window = Tk()
+    info_window.title('Wprowadź dane')
+    Label(info_window, text='Imię:').grid(row=0)
+    Label(info_window, text='Naziwsko:').grid(row=1)
+    name = Entry(info_window)
+    name.grid(row=0, column=1)
+    last_name = Entry(info_window)
+    last_name.grid(row=1, column=1)
+    Button(info_window, text='Show', command=show_entry).grid(row=2, column=1, sticky=E, padx=60)
+    Button(info_window, text='Quit', command=info_window.destroy).grid(row=2, column=1, sticky=E, pady=4)
+
 
 
 # Initializing Tkinter by creating TK root widget - window with title bar.
@@ -88,16 +103,18 @@ Test testowanego testu testów.'''
 description_label = Label(root, justify=LEFT, padx=10, text=explanatation).pack(side='left')
 
 
-# Creating label for counting seconds and quote button
+# Creating label for counting seconds and buttons inside root window
 seconds_label = Label(root, fg='red')
 exit_button = Button(root, text='Quit', width=25, command=quit)
 quote_button = Button(root, text='Quote', width=35, command=quote_display)
 choose_button = Button(root, text='Choose', width=20, command=choose_option)
 check_button = Button(root, text='Check button', width=30, command=check_option)
+info_input = Button(root, text='Dodaj dane', width=30, command=info_input_option)
 exit_button.pack(side='bottom')
 quote_button.pack(side='bottom')
 choose_button.pack(side='bottom')
 check_button.pack(side='bottom')
+info_input.pack(side='bottom')
 seconds_label.pack(side='bottom')
 counter_label(seconds_label)
 
