@@ -31,9 +31,35 @@ def choose_option():
     v = IntVar(master=choose_window)
     options_label = Label(choose_window, text='Długość przerwy:', justify=LEFT, padx=20).pack()
     for option, value in enumerate(brakes_values):
-        Radiobutton(choose_window, text=value+' minut', padx=20, variable=v, command=show_choice, value=option).pack(anchor=W)
+        Radiobutton(choose_window,
+                    text=value+' minut',
+                    padx=20,
+                    variable=v,
+                    command=show_choice,
+                    value=option).pack(anchor=W)
+    # One option with indicator set to 0 (default is 1)
+    Radiobutton(choose_window,
+                text='test value XX minut',
+                padx=20,
+                variable=v,
+                command=show_choice,
+                value=111, indicator=0).pack(anchor=W)
 
 
+def check_option():
+    def check():
+        print(var_1.get())
+        print(var_2.get())
+        print(var_3.get())
+    check_window = Tk()
+    check_window.title('Check box test')
+    Label(check_window, text='Kiedy mają nastąpić przerwy?', padx=50).grid(row=0, sticky=W)
+    var_1 = IntVar(check_window)
+    Checkbutton(check_window, text='Po pierwszej sesji', variable=var_1, command=check).grid(row=1, sticky=W)
+    var_2 = IntVar(check_window)
+    Checkbutton(check_window, text='Po drugiej sesji', variable=var_2, command=check).grid(row=2, sticky=W)
+    var_3 = IntVar(check_window)
+    Checkbutton(check_window, text='Po trzeciej sesji', variable=var_3, command=check).grid(row=3, sticky=W)
 
 
 # Initializing Tkinter by creating TK root widget - window with title bar.
@@ -67,9 +93,11 @@ seconds_label = Label(root, fg='red')
 exit_button = Button(root, text='Quit', width=25, command=quit)
 quote_button = Button(root, text='Quote', width=35, command=quote_display)
 choose_button = Button(root, text='Choose', width=20, command=choose_option)
+check_button = Button(root, text='Check button', width=30, command=check_option)
 exit_button.pack(side='bottom')
 quote_button.pack(side='bottom')
 choose_button.pack(side='bottom')
+check_button.pack(side='bottom')
 seconds_label.pack(side='bottom')
 counter_label(seconds_label)
 
