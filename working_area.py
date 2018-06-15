@@ -99,12 +99,14 @@ def make_form(root, fields):
     return entries
 
 def daily_goals_option():
-    fields = 'Imię:', 'Nazwisko', 'Dzisiejsze założenie', 'Ogólny postęp'
+    fields = 'Imię:', 'Nazwisko:', 'Dzisiejsze założenie:', 'Ogólny postęp:'
     daily_goals_window = Tk()
     daily_goals_window.title('Cele')
     ents = make_form(daily_goals_window, fields)
-    daily_goals_window.bind('<Return>', lambda event, e=ents: fetch(e))
-    show_button = Button(daily_goals_window, text='Show', command=fetch(ents))
+    def show_entries(entries=ents):
+        for entry in entries:
+            print(entry[0], entry[1].get())
+    show_button = Button(daily_goals_window, text='Show', command=show_entries)
     show_button.pack(side=LEFT, padx=5, pady=5)
     quit_button = Button(daily_goals_window, text='Quit', command=daily_goals_window.destroy)
     quit_button.pack(side=LEFT, padx=5, pady=5)
