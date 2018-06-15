@@ -1,4 +1,6 @@
 from tkinter import *
+
+
 # Function section
 counter = 3600000
 
@@ -29,7 +31,7 @@ def choose_option():
     choose_window.title('Choose')
     brakes_values = ['5', '10', '15', '20', '30']
     v = IntVar(master=choose_window)
-    options_label = Label(choose_window, text='Długość przerwy:', justify=LEFT, padx=20).pack()
+    Label(choose_window, text='Długość przerwy:', justify=LEFT, padx=20).pack()
     for option, value in enumerate(brakes_values):
         Radiobutton(choose_window,
                     text=value+' minut',
@@ -60,6 +62,7 @@ def check_option():
     Checkbutton(check_window, text='Po trzeciej sesji', variable=var_3).grid(row=3, sticky=W)
     Button(check_window, text='Show', command=check).grid(row=4, sticky=S, pady=5)
 
+
 def info_input_option():
 
     def show_entry():
@@ -75,6 +78,36 @@ def info_input_option():
     Button(info_window, text='Show', command=show_entry).grid(row=2, column=1, sticky=E, padx=60)
     Button(info_window, text='Quit', command=info_window.destroy).grid(row=2, column=1, sticky=E, pady=4)
 
+
+def fetch(entries):
+    for entry in entries:
+        field = entry[0]
+        text = entry[1]
+        print('{} {}'.format(field, text))
+
+
+def make_form(root, fields):
+    entries = []
+    for field in fields:
+        row = Frame(root)
+        lab = Label(row, width=15, text=field, anchor=W)
+        ent = Entry(row)
+        row.pack(side=TOP, fill=X, padx=5, pady=5)
+        lab.pack(side=LEFT)
+        ent.pack(side=RIGHT, expand=YES, fill=X)
+        entries.append((field, ent))
+    return entries
+
+def daily_goals_option():
+    fields = 'Imię:', 'Nazwisko', 'Dzisiejsze założenie', 'Ogólny postęp'
+    daily_goals_window = Tk()
+    daily_goals_window.title('Cele')
+    ents = make_form(daily_goals_window, fields)
+    daily_goals_window.bind('<Return>', lambda event, e=ents: fetch(e))
+    show_button = Button(daily_goals_window, text='Show', command=fetch(ents))
+    show_button.pack(side=LEFT, padx=5, pady=5)
+    quit_button = Button(daily_goals_window, text='Quit', command=daily_goals_window.destroy)
+    quit_button.pack(side=LEFT, padx=5, pady=5)
 
 
 # Initializing Tkinter by creating TK root widget - window with title bar.
@@ -110,16 +143,15 @@ quote_button = Button(root, text='Quote', width=35, command=quote_display)
 choose_button = Button(root, text='Choose', width=20, command=choose_option)
 check_button = Button(root, text='Check button', width=30, command=check_option)
 info_input = Button(root, text='Dodaj dane', width=30, command=info_input_option)
+daily_goals_input = Button(root, text='Cele', command=daily_goals_option)
 exit_button.pack(side='bottom')
 quote_button.pack(side='bottom')
 choose_button.pack(side='bottom')
 check_button.pack(side='bottom')
 info_input.pack(side='bottom')
+daily_goals_input.pack(side='bottom')
 seconds_label.pack(side='bottom')
 counter_label(seconds_label)
-
-# Creating radio button
-
 
 
 # Running the tkinter event loop which works until we close the window.
