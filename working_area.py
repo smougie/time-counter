@@ -98,6 +98,7 @@ def make_form(root, fields):
         entries.append((field, ent))
     return entries
 
+
 def daily_goals_option():
     fields = 'Imię:', 'Nazwisko:', 'Dzisiejsze założenie:', 'Ogólny postęp:'
     daily_goals_window = Tk()
@@ -110,6 +111,21 @@ def daily_goals_option():
     show_button.pack(side=LEFT, padx=5, pady=5)
     quit_button = Button(daily_goals_window, text='Quit', command=daily_goals_window.destroy)
     quit_button.pack(side=LEFT, padx=5, pady=5)
+
+
+def basic_operation_option():
+
+    def evaluate(event):
+        result.configure(text='Wynik: ' + str(eval(operation_entry.get())))
+
+    operation_window = Tk()
+    operation_window.title('Licz')
+    Label(operation_window, text='Wprowadź działanie matematyczne:').grid(row=0)
+    operation_entry = Entry(operation_window, width=30)
+    operation_entry.bind('<Return>', evaluate)
+    operation_entry.grid(row=1)
+    result = Label(operation_window, text='Wynik:')
+    result.grid(row=2)
 
 
 # Initializing Tkinter by creating TK root widget - window with title bar.
@@ -146,12 +162,14 @@ choose_button = Button(root, text='Choose', width=20, command=choose_option)
 check_button = Button(root, text='Check button', width=30, command=check_option)
 info_input = Button(root, text='Dodaj dane', width=30, command=info_input_option)
 daily_goals_input = Button(root, text='Cele', command=daily_goals_option)
+basic_operation = Button(root, text='Licz', command=basic_operation_option)
 exit_button.pack(side='bottom')
 quote_button.pack(side='bottom')
 choose_button.pack(side='bottom')
 check_button.pack(side='bottom')
 info_input.pack(side='bottom')
 daily_goals_input.pack(side='bottom')
+basic_operation.pack(side='bottom')
 seconds_label.pack(side='bottom')
 counter_label(seconds_label)
 
