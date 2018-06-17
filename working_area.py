@@ -127,6 +127,19 @@ def basic_operation_option():
     result = Label(operation_window, text='Wynik:')
     result.grid(row=2)
 
+def canvas_option():
+    canvas_window = Tk()
+    canvas_window.title('Canvas Graphic')
+    rectangle_area = Canvas(canvas_window, width=200, height=200)
+    rectangle_area.pack()
+    rectangle_area.create_rectangle(50, 50, 150, 150, width=3, fill='light sky blue')
+    rectangle_area.create_rectangle(75, 75, 125, 125, fill='beige')
+    rectangle_area.create_line(0, 0, 50, 50, width=3)
+    rectangle_area.create_line(0, 200, 50, 150, width=3)
+    rectangle_area.create_line(150, 50, 200, 0, width=3)
+    rectangle_area.create_line(150, 150, 200, 200, width=3)
+
+
 
 # Initializing Tkinter by creating TK root widget - window with title bar.
 root = Tk()
@@ -163,6 +176,7 @@ check_button = Button(root, text='Check button', width=30, command=check_option)
 info_input = Button(root, text='Dodaj dane', width=30, command=info_input_option)
 daily_goals_input = Button(root, text='Cele', command=daily_goals_option)
 basic_operation = Button(root, text='Licz', command=basic_operation_option)
+canvas_button = Button(root, text='Sprawdź!', command=canvas_option)
 exit_button.pack(side='bottom')
 quote_button.pack(side='bottom')
 choose_button.pack(side='bottom')
@@ -170,6 +184,7 @@ check_button.pack(side='bottom')
 info_input.pack(side='bottom')
 daily_goals_input.pack(side='bottom')
 basic_operation.pack(side='bottom')
+canvas_button.pack(side='bottom')
 seconds_label.pack(side='bottom')
 counter_label(seconds_label)
 
