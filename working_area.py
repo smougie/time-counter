@@ -6,6 +6,7 @@ counter = 3600000
 
 
 def counter_label(label):
+    """This function will count down 2 hours and 40 minutes lesson. TO DO - parse seconds for H:M:S format."""
     def count():
         global counter
         counter -= 1
@@ -16,6 +17,7 @@ def counter_label(label):
 
 
 def quote_display():
+    """Message pop up window with message - TO DO add sound and change text value."""
     quote_bill_gates = 'Software is a great combination between artistry and engineering.\n(Bill Gates)'
     msg_window = Tk()
     msg_window.title('Quote')
@@ -25,6 +27,7 @@ def quote_display():
 
 
 def choose_option():
+    """Window with break time radio choose."""
     def show_choice():
         print(v.get())
     choose_window = Tk()
@@ -49,6 +52,7 @@ def choose_option():
 
 
 def check_option():
+    """Window with multi select where user choose when he want to make breaks."""
     def check():
         print('Opcja 1: {}\nOpcja 2: {}\nOpcja 3: {}'.format(var_1.get(), var_2.get(), var_3.get()))
     check_window = Tk()
@@ -64,7 +68,7 @@ def check_option():
 
 
 def info_input_option():
-
+    """Window with User name and last name input. I'm not sure if it will be used."""
     def show_entry():
         print('Imie: {}\nNazwisko: {}'.format(name.get(), last_name.get()))
     info_window = Tk()
@@ -79,14 +83,8 @@ def info_input_option():
     Button(info_window, text='Quit', command=info_window.destroy).grid(row=2, column=1, sticky=E, pady=4)
 
 
-def fetch(entries):
-    for entry in entries:
-        field = entry[0]
-        text = entry[1]
-        print('{} {}'.format(field, text))
-
-
 def make_form(root, fields):
+    """This function creates form with data from daily_goals_option function."""
     entries = []
     for field in fields:
         row = Frame(root)
@@ -100,10 +98,12 @@ def make_form(root, fields):
 
 
 def daily_goals_option():
+    """Window with daily goals provided by the user."""
     fields = 'Imię:', 'Nazwisko:', 'Dzisiejsze założenie:', 'Ogólny postęp:'
     daily_goals_window = Tk()
     daily_goals_window.title('Cele')
     ents = make_form(daily_goals_window, fields)
+
     def show_entries(entries=ents):
         for entry in entries:
             print(entry[0], entry[1].get())
@@ -114,7 +114,7 @@ def daily_goals_option():
 
 
 def basic_operation_option():
-
+    """Simply calculator option which calculate user expression"""
     def evaluate(event):
         result.configure(text='Wynik: ' + str(eval(operation_entry.get())))
 
@@ -127,7 +127,9 @@ def basic_operation_option():
     result = Label(operation_window, text='Wynik:')
     result.grid(row=2)
 
+
 def canvas_option():
+    """In this function I'm preparing some graphic using tkinter tool - canvas"""
     canvas_window = Tk()
     canvas_window.title('Canvas Graphic')
     rectangle_area = Canvas(canvas_window, width=200, height=200)
@@ -138,7 +140,11 @@ def canvas_option():
     rectangle_area.create_line(0, 200, 50, 150, width=3)
     rectangle_area.create_line(150, 50, 200, 0, width=3)
     rectangle_area.create_line(150, 150, 200, 200, width=3)
+    rectangle_area.create_text(100, 100, text='Rafon')
 
+
+def canvas_option_2():
+    pass
 
 
 # Initializing Tkinter by creating TK root widget - window with title bar.
