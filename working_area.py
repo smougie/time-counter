@@ -155,20 +155,33 @@ def canvas_flex_option():
                     canvas_height * ratio,
                     canvas_width * (1 - ratio),
                     canvas_height * (1 - ratio)))
+    print(box)
 
     canvas_2_window = Tk()
     canvas_2_window.title('Canvas FLEX')
     flexible_rects = Canvas(canvas_2_window, width=canvas_width, height=canvas_height)
     flexible_rects.pack()
 
+    # Two rectangles
     for i in range(2):
         flexible_rects.create_rectangle(box[i][0], box[i][1], box[i][2], box[i][3], fill=colours[i])
 
+    # Lines
     flexible_rects.create_line(0, 0, box[0][0], box[0][1], fill=colours[0], width=2)
     flexible_rects.create_line(canvas_width, 0, box[0][2], box[0][1], fill=colours[0], width=2)
     flexible_rects.create_line(0, canvas_height, box[0][0], box[0][3], fill=colours[0], width=2)
     flexible_rects.create_line(canvas_width, canvas_height, box[0][2], box[0][3], fill=colours[0], width=2)
     flexible_rects.create_text(canvas_width / 2, canvas_height / 2, text='TEXT', fill='red')
+
+    # Polygons
+    flexible_rects.create_polygon([0, 0, (canvas_width / 2), box[0][1], canvas_width, 0],
+                                  outline='green', fill='yellow', width=1)
+    flexible_rects.create_polygon([0, 0, box[0][0], (canvas_height / 2), 0, canvas_height],
+                                  outline='green', fill='yellow', width=1)
+    flexible_rects.create_polygon([canvas_width, 0, box[0][2], (canvas_height / 2), canvas_width, canvas_height],
+                                  outline='green', fill='yellow', width=1)
+    flexible_rects.create_polygon([0, canvas_height, (canvas_width / 2), box[0][3], canvas_width, canvas_height],
+                                  outline='green', fill='yellow', width=1)
 
 
 def oval_canvas():
@@ -204,7 +217,7 @@ def oval_canvas():
 
 
 def paint():
-    """This function allows to draw something in app using left mouse button."""
+    """This function allows to draw in app using left mouse button."""
     canvas_width = 500
     canvas_height = 200
 
