@@ -1,5 +1,5 @@
 from tkinter import *
-
+from datetime import datetime
 
 # Function section
 counter = 3600000
@@ -143,8 +143,63 @@ def canvas_option():
     rectangle_area.create_text(100, 100, text='Rafon')
 
 
-def canvas_option_2():
-    pass
+def canvas_flex_option():
+    """Another function which create graphic, but this one will be more flexible."""
+    canvas_width = 200
+    canvas_height = 100
+    colours = ['light slate grey', 'pale green']
+    box = []
+
+    for ratio in (0.2, 0.35):
+        box.append((canvas_width * ratio,
+                    canvas_height * ratio,
+                    canvas_width * (1 - ratio),
+                    canvas_height * (1 - ratio)))
+
+    canvas_2_window = Tk()
+    canvas_2_window.title('Canvas FLEX')
+    flexible_rects = Canvas(canvas_2_window, width=canvas_width, height=canvas_height)
+    flexible_rects.pack()
+
+    for i in range(2):
+        flexible_rects.create_rectangle(box[i][0], box[i][1], box[i][2], box[i][3], fill=colours[i])
+
+    flexible_rects.create_line(0, 0, box[0][0], box[0][1], fill=colours[0], width=2)
+    flexible_rects.create_line(canvas_width, 0, box[0][2], box[0][1], fill=colours[0], width=2)
+    flexible_rects.create_line(0, canvas_height, box[0][0], box[0][3], fill=colours[0], width=2)
+    flexible_rects.create_line(canvas_width, canvas_height, box[0][2], box[0][3], fill=colours[0], width=2)
+    flexible_rects.create_text(canvas_width / 2, canvas_height / 2, text='TEXT', fill='red')
+
+
+def oval_canvas():
+    circle_width = 500
+    circle_height = 250
+    colours = ['spring green', 'yellow green']
+    box = []
+
+    for ratio in (0.2, 0.3):
+        box.append((circle_width * ratio,
+                    circle_height * ratio,
+                    circle_width * (1 - ratio),
+                    circle_height * (1 - ratio)))
+
+    oval_window = Tk()
+    oval_window.title('Oval')
+    circle_area = Canvas(oval_window, width=circle_width, height=circle_height)
+    circle_area.pack()
+
+    for i in range(2):
+        circle_area.create_oval(box[i][0], box[i][1], box[i][2], box[i][3], width=2, fill=colours[i])
+
+    # Time for circle
+    circle_time = circle_area.create_text(circle_width / 2, circle_height / 2, font='Times 24')
+
+    def update_time():
+        time_now = datetime.now().time().strftime('%X')
+        circle_area.itemconfigure(circle_time, text=time_now)
+        oval_window.after(1000, update_time)
+
+    update_time()
 
 
 # Initializing Tkinter by creating TK root widget - window with title bar.
@@ -173,7 +228,8 @@ Test testowanego testu testów.'''
 description_label = Label(root, justify=LEFT, padx=10, text=explanatation).pack(side='left')
 
 
-# Creating label for counting seconds and buttons inside root window
+# Buttons and Labels section
+# Labels and button
 seconds_label = Label(root, fg='red')
 exit_button = Button(root, text='Quit', width=25, command=quit)
 quote_button = Button(root, text='Quote', width=35, command=quote_display)
@@ -182,7 +238,11 @@ check_button = Button(root, text='Check button', width=30, command=check_option)
 info_input = Button(root, text='Dodaj dane', width=30, command=info_input_option)
 daily_goals_input = Button(root, text='Cele', command=daily_goals_option)
 basic_operation = Button(root, text='Licz', command=basic_operation_option)
-canvas_button = Button(root, text='Sprawdź!', command=canvas_option)
+canvas_button = Button(root, text='Grafika', command=canvas_option)
+flexible_canvas_button = Button(root, text='Flex Grafika', command=canvas_flex_option)
+oval_canvas_button = Button(root, text='Owalna Grafika', command=oval_canvas)
+
+# Section responsible for putting button and labels inside root window
 exit_button.pack(side='bottom')
 quote_button.pack(side='bottom')
 choose_button.pack(side='bottom')
@@ -191,6 +251,8 @@ info_input.pack(side='bottom')
 daily_goals_input.pack(side='bottom')
 basic_operation.pack(side='bottom')
 canvas_button.pack(side='bottom')
+flexible_canvas_button.pack(side='bottom')
+oval_canvas_button.pack(side='bottom')
 seconds_label.pack(side='bottom')
 counter_label(seconds_label)
 
