@@ -172,6 +172,7 @@ def canvas_flex_option():
 
 
 def oval_canvas():
+    """Function which will display current time in some canvas ovals."""
     circle_width = 500
     circle_height = 250
     colours = ['spring green', 'yellow green']
@@ -191,7 +192,7 @@ def oval_canvas():
     for i in range(2):
         circle_area.create_oval(box[i][0], box[i][1], box[i][2], box[i][3], width=2, fill=colours[i])
 
-    # Time for circle
+    # Clock for circle_area
     circle_time = circle_area.create_text(circle_width / 2, circle_height / 2, font='Times 24')
 
     def update_time():
@@ -200,6 +201,27 @@ def oval_canvas():
         oval_window.after(1000, update_time)
 
     update_time()
+
+
+def paint():
+    """This function allows to draw something in app using left mouse button."""
+    canvas_width = 500
+    canvas_height = 200
+
+    def drawing(event):
+        color = 'red'
+        x1, y1 = (event.x - 1), (event.y - 1)
+        x2, y2 = (event.x + 1), (event.y + 1)
+        draw.create_oval(x1, y1, x2, y2, fill=color)
+
+    paint_window = Tk()
+    paint_window.title('Rysuj')
+    draw = Canvas(paint_window, width=canvas_width, height=canvas_height)
+    draw.pack(expand=YES, fill=BOTH)
+    draw.bind('<B1-Motion>', drawing)
+
+    message = Label(paint_window, text='Naciśnij lewy przycisk myszy aby rysować')
+    message.pack(side='bottom')
 
 
 # Initializing Tkinter by creating TK root widget - window with title bar.
@@ -241,6 +263,7 @@ basic_operation = Button(root, text='Licz', command=basic_operation_option)
 canvas_button = Button(root, text='Grafika', command=canvas_option)
 flexible_canvas_button = Button(root, text='Flex Grafika', command=canvas_flex_option)
 oval_canvas_button = Button(root, text='Owalna Grafika', command=oval_canvas)
+paint_button = Button(root, text='Rysuj', command=paint)
 
 # Section responsible for putting button and labels inside root window
 exit_button.pack(side='bottom')
@@ -253,6 +276,7 @@ basic_operation.pack(side='bottom')
 canvas_button.pack(side='bottom')
 flexible_canvas_button.pack(side='bottom')
 oval_canvas_button.pack(side='bottom')
+paint_button.pack(side='bottom')
 seconds_label.pack(side='bottom')
 counter_label(seconds_label)
 
