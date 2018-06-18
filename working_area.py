@@ -237,6 +237,26 @@ def paint():
     message.pack(side='bottom')
 
 
+def bars():
+    """Function creates bars in whole canvas area."""
+    canvas_width = 500
+    canvas_height = 500
+
+    def draw_bars(bars_area, dist):
+        steps = int(canvas_width / dist)
+        point = 0
+        for i in range(0, steps):
+            bars_area.create_line(point, 0, point, canvas_height)
+            bars_area.create_line(0, point, canvas_width, point)
+            point += dist
+
+    bars_window = Tk()
+    bars_window.title('Kraty')
+    bars_area = Canvas(bars_window, width=canvas_width, height=canvas_height)
+    bars_area.pack()
+    draw_bars(bars_area, 10)
+
+
 # Initializing Tkinter by creating TK root widget - window with title bar.
 root = Tk()
 root.title('Time Counter')
@@ -277,6 +297,7 @@ canvas_button = Button(root, text='Grafika', command=canvas_option)
 flexible_canvas_button = Button(root, text='Flex Grafika', command=canvas_flex_option)
 oval_canvas_button = Button(root, text='Owalna Grafika', command=oval_canvas)
 paint_button = Button(root, text='Rysuj', command=paint)
+bars_button = Button(root, text='Bars', command=bars)
 
 # Section responsible for putting button and labels inside root window
 exit_button.pack(side='bottom')
@@ -290,6 +311,7 @@ canvas_button.pack(side='bottom')
 flexible_canvas_button.pack(side='bottom')
 oval_canvas_button.pack(side='bottom')
 paint_button.pack(side='bottom')
+bars_button.pack(side='bottom')
 seconds_label.pack(side='bottom')
 counter_label(seconds_label)
 
