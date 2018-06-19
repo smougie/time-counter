@@ -298,8 +298,12 @@ flexible_canvas_button = Button(root, text='Flex Grafika', command=canvas_flex_o
 oval_canvas_button = Button(root, text='Owalna Grafika', command=oval_canvas)
 paint_button = Button(root, text='Rysuj', command=paint)
 bars_button = Button(root, text='Bars', command=bars)
+minute_slider = Scale(root, from_=0, to_=59)
+hour_slider = Scale(root, from_=0, to_=12)
 
-# Section responsible for putting button and labels inside root window
+# Section responsible for putting button, labels and sliders inside root window
+minute_slider.pack(side='right')
+hour_slider.pack(side='right')
 exit_button.pack(side='bottom')
 quote_button.pack(side='bottom')
 choose_button.pack(side='bottom')
